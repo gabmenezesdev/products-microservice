@@ -1,0 +1,16 @@
+export enum Category {
+    FASHION = 'fashion',
+    ELECTRONICS = 'electronics',
+    HOME = 'home',
+    BEAUTY = 'beauty',
+    SPORTS_OUTDOORS = 'sports_outdoors',
+    BOOKS_MEDIA = 'books_media',
+    HEALTH_WELLNESS = 'health_wellness',
+    TOYS_GAMES = 'toys_games',
+    FOOD_BEVERAGE = 'food_beverage',
+    ART_CRAFTS = 'art_crafts',
+    TECHNOLOGY_INNOVATION = 'technology_innovation',
+    TRAVEL_ADVENTURE = 'travel_adventure',
+    PETS = 'pets',
+    SUSTAINABLE_PRODUCTS = 'sustainable_products',
+}
