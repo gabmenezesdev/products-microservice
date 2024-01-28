@@ -1,9 +1,12 @@
-class CreateProduct {
+import { IProduct } from "../../interfaces/IProduct";
+import { IProductRepository } from "../../interfaces/IProductRepository";
 
-    async execute(){
-        console.log("ola mundo")
-    }
+class CreateProduct {
+  constructor(private productRepository: IProductRepository) {}
+
+  async execute(createBody: IProduct): Promise<void> {
+    await this.productRepository.save(createBody);
+  }
 }
 
-const createProduct = new CreateProduct;
-export { createProduct }
+export { CreateProduct };
