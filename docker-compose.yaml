@@ -8,3 +8,11 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
+
+  mongodb:
+    image: mongo:6.0
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodbData:/data/db

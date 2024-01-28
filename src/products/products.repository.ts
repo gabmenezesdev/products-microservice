@@ -1,21 +1,24 @@
 import { IProduct } from "../interfaces/IProduct";
 import { IProductRepository } from "../interfaces/IProductRepository";
-
+import productSchema from "./product.schema";
 class ProductRepository implements IProductRepository {
-  save(productBody: IProduct): Promise<void> {
-    throw new Error("Method not implemented.");
+  async save(productBody: IProduct): Promise<void> {
+    await productSchema.create(productBody);
   }
-  findAll(skip: number, limit: number): Promise<IProduct[]> {
-    throw new Error("Method not implemented.");
+  async findAll(skip: number, limit: number): Promise<IProduct[]> {
+    return productSchema.find().skip(skip).limit(limit);
   }
-  findById(productId: string): Promise<IProduct> {
-    throw new Error("Method not implemented.");
+  async findById(productId: string): Promise<IProduct> {
+    return productSchema.findById(productId);
   }
-  update(productId: string, updateBody: Partial<IProduct>): Promise<void> {
-    throw new Error("Method not implemented.");
+  async update(
+    productId: string,
+    updateBody: Partial<IProduct>
+  ): Promise<void> {
+    await productSchema.updateOne({ _id: productId }, updateBody);
   }
-  delete(productId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async delete(productId: string): Promise<void> {
+    await productSchema.deleteOne({ _id: productId });
   }
 }
 export { ProductRepository };

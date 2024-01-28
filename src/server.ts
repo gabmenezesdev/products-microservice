@@ -1,11 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
 import { router } from "./routes";
 import * as dotenv from "dotenv";
+import * as mongoose from "mongoose";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+mongoose.connect(process.env.DB_URL || "localhost:27017");
 
 app.get("/ping", (req, res) => {
   return res.send("Service online!");
