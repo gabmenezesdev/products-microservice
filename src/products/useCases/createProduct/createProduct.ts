@@ -1,5 +1,5 @@
-import { IProduct } from "../../interfaces/IProduct";
-import { IProductRepository } from "../../interfaces/IProductRepository";
+import { IProduct } from "../../../interfaces/IProduct";
+import { IProductRepository } from "../../../interfaces/IProductRepository";
 
 class CreateProduct {
   constructor(private productRepository: IProductRepository) {}

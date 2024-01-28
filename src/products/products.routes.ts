@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { productController } from "./products.controller";
+import { createProductController } from "./useCases/createProduct/createProducts.controller";
 
 const ProductRouter = Router();
 
-ProductRouter.post("/", productController.create);
+ProductRouter.post("/", createProductController.handle);
 // .get('/', memedController.unlinkUserMemed)
 // .put('/', memedController.unlinkUserMemed)
 // .delete('/', memedController.unlinkUserMemed)

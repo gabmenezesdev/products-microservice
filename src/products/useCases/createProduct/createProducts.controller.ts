@@ -1,13 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateProductDto } from "./dto/createProduct.dto";
-import { CreateProduct } from "./useCases/createProduct";
-import { ProductRepository } from "./products.repository";
+import { CreateProductDto } from "./createProduct.dto";
+import { CreateProduct } from "./createProduct";
+import { ProductRepository } from "../../products.repository";
 import { StatusCodes } from "http-status-codes";
 
-class ProductController {
-  // getOne(req: Request, res: Response, next: NextFunction): Promise<IProduct>{
-  // }
-  async create(
+class CreateProductController {
+  async handle(
     req: Request,
     res: Response,
     next: NextFunction
@@ -25,6 +23,6 @@ class ProductController {
     }
   }
 }
-const productController = new ProductController();
+const createProductController = new CreateProductController();
 
-export { productController };
+export { createProductController };

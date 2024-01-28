@@ -1,8 +1,8 @@
-import { IProduct } from "../../interfaces/IProduct";
+import { IProduct } from "../../../interfaces/IProduct";
 import { IsNotEmpty, MinLength, IsEnum, validateSync } from "class-validator";
-import { Category } from "../../enums/category.enum";
+import { Category } from "../../../enums/category.enum";
 import { StatusCodes } from "http-status-codes";
-import { GetFirstErrorMessage, HttpRequestError } from "../../exceptions";
+import { GetFirstErrorMessage, HttpRequestError } from "../../../exceptions";
 
 class CreateProductDto {
   constructor(props: IProduct) {
