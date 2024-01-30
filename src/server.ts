@@ -11,7 +11,9 @@ const app = express();
 app.use(express.json());
 
 // DB connection
-mongoose.connect(process.env.DB_URL || "localhost:27017");
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://mongodbdatabase:27017/ecommerce"
+);
 
 // Service validation route
 app.get("/ping", (req, res) => {
@@ -38,7 +40,7 @@ app.use(function error(
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("servidor online");
+  console.log("Servidor Online");
 });
 
 export { app };

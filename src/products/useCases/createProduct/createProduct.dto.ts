@@ -1,5 +1,5 @@
 import { IProduct } from "../../../interfaces/IProduct";
-import { IsNotEmpty, MinLength, IsEnum, validateSync } from "class-validator";
+import { IsNotEmpty, IsEnum, validateSync, Min } from "class-validator";
 import { Category } from "../../../enums/category.enum";
 import { StatusCodes } from "http-status-codes";
 import { GetFirstErrorMessage, HttpRequestError } from "../../../exceptions";
@@ -28,7 +28,7 @@ class CreateProductDto {
   price: number;
 
   @IsNotEmpty({ message: "Quantidade não informada" })
-  @MinLength(1, { message: "A quantidade deve ser maior que 0" })
+  @Min(0, { message: "A quantidade deve ser maior que 0" })
   @IsNotEmpty({ message: "Quantidade não informada" })
   quantity: number;
 
