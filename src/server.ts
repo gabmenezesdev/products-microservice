@@ -33,7 +33,6 @@ app.use(function error(
   res: Response,
   next: NextFunction
 ) {
-  console.error(err.stack);
   const errorMessage = err.status ? err.message : "Erro interno no servidor";
   const statusCode = err.status || 500;
   return res.status(statusCode).json({ message: errorMessage });

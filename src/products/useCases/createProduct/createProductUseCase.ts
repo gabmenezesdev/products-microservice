@@ -1,7 +1,7 @@
 import { IProduct } from "../../../interfaces/IProduct";
 import { IProductRepository } from "../../../interfaces/IProductRepository";
 
-class CreateProduct {
+class CreateProductUseCase {
   constructor(private productRepository: IProductRepository) {}
 
   async execute(createBody: IProduct): Promise<void> {
@@ -9,4 +9,4 @@ class CreateProduct {
   }
 }
 
-export { CreateProduct };
+export { CreateProductUseCase };

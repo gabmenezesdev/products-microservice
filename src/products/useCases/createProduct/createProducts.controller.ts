@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateProductDto } from "./createProduct.dto";
-import { CreateProduct } from "./createProduct";
+import { CreateProductUseCase } from "./createProductUseCase";
 import { ProductRepository } from "../../products.repository";
 import { StatusCodes } from "http-status-codes";
 
@@ -14,7 +14,7 @@ class CreateProductController {
       const createBody = new CreateProductDto(req.body);
       const productRepository = new ProductRepository();
 
-      const createProduct = new CreateProduct(productRepository);
+      const createProduct = new CreateProductUseCase(productRepository);
       await createProduct.execute(createBody);
 
       return res.status(StatusCodes.CREATED).send();
