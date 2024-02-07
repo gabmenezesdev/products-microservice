@@ -10,6 +10,7 @@ const productSchema = new Schema<IProduct>(
     category: { type: String, required: true },
     description: { type: String },
     details: [{ type: String }],
+    user: { type: String },
   },
   {
     timestamps: true,

@@ -2,6 +2,7 @@ import request from "supertest";
 import { app } from "../../../../server";
 import { CreateProductUseCase } from "../createProductUseCase";
 import { IProduct } from "../../../../interfaces/IProduct";
+import { creationBody } from "../../../../testUtils/productMockData";
 
 jest.mock("../createProductUseCase");
 
@@ -9,15 +10,6 @@ describe("Create Product Controller", () => {
   jest
     .spyOn(CreateProductUseCase.prototype, "execute")
     .mockImplementation(async (createBody: IProduct) => {});
-
-  const creationBody = {
-    title: "Refrigerator",
-    price: 2000,
-    category: "home",
-    quantity: 5,
-    description: "Consul Refrigerator 400 L",
-    details: ["Color: White", "Condition: New"],
-  };
 
   it("Should be able to create a product", async () => {
     //given
