@@ -13,12 +13,16 @@ class ProductRepository implements IProductRepository {
   }
   async update(
     productId: string,
+    companyId: string,
     updateBody: Partial<IProduct>
   ): Promise<void> {
-    await productSchema.updateOne({ _id: productId }, updateBody);
+    await productSchema.updateOne(
+      { _id: productId, company: companyId },
+      updateBody
+    );
   }
-  async delete(productId: string): Promise<void> {
-    await productSchema.deleteOne({ _id: productId });
+  async delete(productId: string, companyId: string): Promise<void> {
+    await productSchema.deleteOne({ _id: productId, company: companyId });
   }
 }
 export { ProductRepository };
