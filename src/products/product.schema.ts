@@ -11,6 +11,7 @@ const productSchema = new Schema<IProduct>(
     description: { type: String },
     details: [{ type: String }],
     user: { type: String },
+    company: { type: String },
   },
   {
     timestamps: true,

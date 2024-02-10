@@ -5,7 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import { GetFirstErrorMessage, HttpRequestError } from "../../../exceptions";
 
 class CreateProductDto {
-  constructor(props: IProduct) {
+  constructor(props: Partial<IProduct>) {
     this.title = props.title;
     this.category = props.category;
     this.price = props.price;

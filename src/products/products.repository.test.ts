@@ -5,27 +5,23 @@ import productSchema from "./product.schema";
 import { creationBody, updateBody } from "../testUtils/productMockData";
 
 let replset;
-// let productRepository;
+
 let productSchemaInstance = productSchema;
 
-// Antes de iniciar os testes, configure o servidor MongoDB em memória
 beforeAll(async () => {
   replset = await MongoMemoryReplSet.create({ replSet: { count: 3 } });
   const mongoUri = replset.getUri();
   await mongoose.connect(mongoUri, {});
 });
 
-// Antes de cada teste, crie uma nova instância do repositório
 // beforeEach(() => {
 //   productRepository = new ProductRepository();
 // });
 
-// Após cada teste, limpe o banco de dados e feche a conexão
 // afterEach(async () => {
 //   await mongoose.connection.dropDatabase();
 // });
 
-// Após todos os testes, pare o servidor MongoDB em memória e feche a conexão
 afterAll(async () => {
   await mongoose.connection.dropDatabase();
   await mongoose.disconnect();
@@ -66,5 +62,27 @@ describe("Product Repository Tests", () => {
 
     expect(foundProduct).toBeDefined();
     expect(foundProduct).toEqual(expect.objectContaining(updateBody));
+  });
+
+  test("Should get all products from the database", async () => {
+    await productRepository.save(creationBody);
+    await productRepository.save(creationBody);
+    const allProducts = await productRepository.findAll(1, 10);
+
+    expect(allProducts).toBeDefined();
+    expect(allProducts).toHaveLength(3);
+    expect(allProducts[0]).toEqual(expect.objectContaining(updateBody));
+  });
+
+  test("Should delete a product from database", async () => {
+    await productRepository.delete(createdProductId);
+
+    const foundProduct = await productSchemaInstance
+      .findOne({
+        _id: createdProductId,
+      })
+      .lean();
+
+    expect(foundProduct).toBeNull();
   });
 });

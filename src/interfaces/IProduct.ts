@@ -1,5 +1,6 @@
 export interface IProduct {
   _id?: string;
+  company: string;
   user: string;
   title: string;
   price: number;

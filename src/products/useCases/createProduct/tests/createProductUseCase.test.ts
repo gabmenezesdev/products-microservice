@@ -1,5 +1,5 @@
 import { CreateProductUseCase } from "../createProductUseCase";
-import { ProductRepositoryMock } from "./productRepositoryMock";
+import { ProductRepositoryMock } from "../../../../testUtils/productRepositoryMock";
 import { creationBody } from "../../../../testUtils/productMockData";
 
 describe("Create Product UseCase", () => {

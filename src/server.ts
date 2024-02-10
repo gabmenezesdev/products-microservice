@@ -33,13 +33,13 @@ app.use(function error(
   res: Response,
   next: NextFunction
 ) {
-  const errorMessage = err.status ? err.message : "Erro interno no servidor";
+  const errorMessage = err.status ? err.message : "Server internal error";
   const statusCode = err.status || 500;
   return res.status(statusCode).json({ message: errorMessage });
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("Servidor Online");
+  console.log("Server Online");
 });
 
 export { app };
