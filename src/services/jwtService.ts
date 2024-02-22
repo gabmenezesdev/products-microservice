@@ -13,9 +13,7 @@ class JWTService {
 
   async verifyToken(token: string) {
     try {
-      console.log("antes");
       const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
-      console.log("depois");
       return decoded;
     } catch (err) {
       console.log(err);
