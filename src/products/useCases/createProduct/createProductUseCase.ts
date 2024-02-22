@@ -5,6 +5,7 @@ class CreateProductUseCase {
   constructor(private productRepository: IProductRepository) {}
 
   async execute(createBody: IProduct): Promise<void> {
+    console.log("aqui");
     await this.productRepository.save(createBody);
   }
 }

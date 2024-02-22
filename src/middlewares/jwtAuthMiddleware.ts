@@ -1,30 +1,26 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import HttpRequestError from "../exceptions";
-import jwt from "jsonwebtoken";
+import { JWTService } from "../services/jwtService";
 
 class JWTAuthMiddleware {
-  jwtAuthenticator(req: Request, res: Response, next: NextFunction): void {
+  async jwtAuthenticator(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     const authHeader = req.headers["authorization"];
     if (!authHeader) {
       throw new HttpRequestError(StatusCodes.UNAUTHORIZED, "Unauthorized");
     }
+    const jwtService = new JWTService();
 
     const token = authHeader.split(" ")[1];
-    const decodedToken = this.verifyToken(token);
-    req["user"].id = decodedToken.id;
-    req["user"].companyId = decodedToken.companyId;
-    return next();
-  }
+    const decodedToken = await jwtService.verifyToken(token);
 
-  verifyToken(token: string) {
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      return decoded;
-    } catch (err) {
-      console.log(err);
-      throw new HttpRequestError(StatusCodes.UNAUTHORIZED, "Unauthorized");
-    }
+    req["user"] = decodedToken;
+
+    return next();
   }
 }
 

@@ -13,6 +13,7 @@ class CreateProductController {
     next: NextFunction
   ): Promise<Response> {
     try {
+      console.log("aqui");
       const createBody = new CreateProductDto(req.body);
       const productRepository = new ProductRepository();
       const product: IProduct = {
@@ -26,6 +27,7 @@ class CreateProductController {
 
       return res.status(StatusCodes.CREATED).send();
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
