@@ -4,7 +4,7 @@ import { JWTService } from "../../../services/jwtService";
 class GenerateTokenUseCase {
   execute(): string {
     const jwtService = new JWTService();
-    return jwtService.generateToken({ id: "1", clinicId: "1" }, "1w");
+    return jwtService.generateToken({ id: "1", clinicId: "1" }, "1y");
   }
 }
 

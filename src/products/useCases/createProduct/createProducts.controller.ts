@@ -15,6 +15,7 @@ class CreateProductController {
     try {
       console.log("aqui");
       const createBody = new CreateProductDto(req.body);
+      console.log(createBody);
       const productRepository = new ProductRepository();
       const product: IProduct = {
         ...createBody,

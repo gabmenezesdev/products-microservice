@@ -9,18 +9,22 @@ class JWTAuthMiddleware {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const authHeader = req.headers["authorization"];
-    if (!authHeader) {
+    try {
+      const authHeader = req.headers["authorization"];
+      if (!authHeader) {
+        throw new HttpRequestError(StatusCodes.UNAUTHORIZED, "Unauthorized");
+      }
+      const jwtService = new JWTService();
+
+      const token = authHeader.split(" ")[1];
+      const decodedToken = await jwtService.verifyToken(token);
+
+      req["user"] = decodedToken;
+
+      return next();
+    } catch (error) {
       throw new HttpRequestError(StatusCodes.UNAUTHORIZED, "Unauthorized");
     }
-    const jwtService = new JWTService();
-
-    const token = authHeader.split(" ")[1];
-    const decodedToken = await jwtService.verifyToken(token);
-
-    req["user"] = decodedToken;
-
-    return next();
   }
 }
 

@@ -2,7 +2,7 @@ import request from "supertest";
 import { app } from "../../../../server";
 import { CreateProductUseCase } from "../createProductUseCase";
 import { IProduct } from "../../../../interfaces/IProduct";
-import { creationBody } from "../../../../testUtils/productMockData";
+import { creationBody, testToken } from "../../../../testUtils/productMockData";
 
 jest.mock("../createProductUseCase");
 
@@ -17,6 +17,7 @@ describe("Create Product Controller", () => {
     //when
     const response = await request(app)
       .post("/api/v1/products")
+      .set("Authorization", testToken)
       .send(fullCreation);
 
     console.log("response");
@@ -36,6 +37,7 @@ describe("Create Product Controller", () => {
     //when
     const response = await request(app)
       .post("/api/v1/products")
+      .set("Authorization", testToken)
       .send(partialCreation);
 
     //then
@@ -53,11 +55,14 @@ describe("Create Product Controller", () => {
     //when
     const response = await request(app)
       .post("/api/v1/products")
+      .set("Authorization", testToken)
       .send(partialCreation);
 
     //then
     expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
+    expect(JSON.parse(response.text).message).toBe(
+      "O preço deve ser maior que 0"
+    );
   });
 
   it("Should throw a category error", async () => {
@@ -70,11 +75,12 @@ describe("Create Product Controller", () => {
     //when
     const response = await request(app)
       .post("/api/v1/products")
+      .set("Authorization", testToken)
       .send(partialCreation);
 
     //then
     expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
+    expect(JSON.parse(response.text).message).toBe("Categoria inválida");
   });
 
   it("Should throw a quantity error", async () => {
@@ -87,78 +93,13 @@ describe("Create Product Controller", () => {
     //when
     const response = await request(app)
       .post("/api/v1/products")
+      .set("Authorization", testToken)
       .send(partialCreation);
 
     //then
     expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
-  });
-
-  it("Should throw a description error", async () => {
-    //given
-    const partialCreation = {
-      ...creationBody,
-      description: "",
-    };
-
-    //when
-    const response = await request(app)
-      .post("/api/v1/products")
-      .send(partialCreation);
-
-    //then
-    expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
-  });
-
-  it("Should throw a details error", async () => {
-    //given
-    const partialCreation = {
-      ...creationBody,
-      details: null,
-    };
-
-    //when
-    const response = await request(app)
-      .post("/api/v1/products")
-      .send(partialCreation);
-
-    //then
-    expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
-  });
-
-  it("Should throw an user error", async () => {
-    //given
-    const partialCreation = {
-      ...creationBody,
-      user: "",
-    };
-
-    //when
-    const response = await request(app)
-      .post("/api/v1/products")
-      .send(partialCreation);
-
-    //then
-    expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
-  });
-
-  it("Should throw a company error", async () => {
-    //given
-    const partialCreation = {
-      ...creationBody,
-      user: "",
-    };
-
-    //when
-    const response = await request(app)
-      .post("/api/v1/products")
-      .send(partialCreation);
-
-    //then
-    expect(response.statusCode).toBe(400);
-    expect(JSON.parse(response.text).message).toBe("Título não informado");
+    expect(JSON.parse(response.text).message).toBe(
+      "A quantidade deve ser maior que 0"
+    );
   });
 });

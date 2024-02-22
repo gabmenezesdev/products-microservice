@@ -14,6 +14,8 @@ class CreateProductDto {
     this.details = props.details;
 
     const errors = validateSync(this);
+    console.log("nenum erro");
+    console.log(errors);
     if (errors.length) {
       const getFirstErrorMessage = new GetFirstErrorMessage();
       const message = getFirstErrorMessage.execute(errors);
@@ -25,10 +27,11 @@ class CreateProductDto {
   title: string;
 
   @IsNotEmpty({ message: "Preço não informado" })
+  @Min(1, { message: "O preço deve ser maior que 0" })
   price: number;
 
   @IsNotEmpty({ message: "Quantidade não informada" })
-  @Min(0, { message: "A quantidade deve ser maior que 0" })
+  @Min(1, { message: "A quantidade deve ser maior que 0" })
   @IsNotEmpty({ message: "Quantidade não informada" })
   quantity: number;
 

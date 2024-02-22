@@ -21,4 +21,7 @@ const updateBody: IProduct = {
   user: "2",
   company: "2",
 };
-export { creationBody, updateBody };
+
+const testToken =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJjbGluaWNJZCI6IjEiLCJpYXQiOjE3MDg1Njc4MTAsImV4cCI6MTc0MDEyNTQxMH0.MxsJkVfwTsksVWA3CCkLuukBYxtFBlNg2anJBOyMwsc";
+export { creationBody, updateBody, testToken };
