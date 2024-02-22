@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./swagger.json";
+import cors from "cors";
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ mongoose.connect(
 app.get("/ping", (req, res) => {
   return res.send("Service online!");
 });
+
+// Allow all origins
+app.use(cors());
 
 // Service routes
 app.use("/api/", router);

@@ -4,13 +4,27 @@ import { deleteProductController } from "./useCases/deleteProduct/deleteProducts
 import { getAllProductController } from "./useCases/getAllProduct/getAllProducts.controller";
 import { getProductController } from "./useCases/getProduct/getProducts.controller";
 import { updateProductController } from "./useCases/updateProduct/updateProducts.controller";
+import { JWTAuthMiddleware } from "../middlewares/jwtAuthMiddleware";
 
 const ProductRouter = Router();
+const jwtAuthMiddleware = new JWTAuthMiddleware();
 
-ProductRouter.post("/", createProductController.handle)
+ProductRouter.post(
+  "/",
+  jwtAuthMiddleware.jwtAuthenticator,
+  createProductController.handle
+)
   .get("/", getAllProductController.handle)
   .get("/:productId", getProductController.handle)
-  .put("/:productId", updateProductController.handle)
-  .delete("/:productId", deleteProductController.handle);
+  .put(
+    "/:productId",
+    jwtAuthMiddleware.jwtAuthenticator,
+    updateProductController.handle
+  )
+  .delete(
+    "/:productId",
+    jwtAuthMiddleware.jwtAuthenticator,
+    deleteProductController.handle
+  );
 
 export { ProductRouter };

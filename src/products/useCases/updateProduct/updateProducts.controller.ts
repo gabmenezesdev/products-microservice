@@ -3,7 +3,6 @@ import { UpdateProductDto } from "./updateProduct.dto";
 import { UpdateProductUseCase } from "./updateProductUseCase";
 import { ProductRepository } from "../../products.repository";
 import { StatusCodes } from "http-status-codes";
-import { IProduct } from "../../../interfaces/IProduct";
 import { IRequestWithUser } from "../../../interfaces/IRequestWithUser";
 
 class UpdateProductController {

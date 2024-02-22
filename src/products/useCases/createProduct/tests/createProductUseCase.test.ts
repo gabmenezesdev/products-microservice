@@ -3,7 +3,7 @@ import { ProductRepositoryMock } from "../../../../testUtils/productRepositoryMo
 import { creationBody } from "../../../../testUtils/productMockData";
 
 describe("Create Product UseCase", () => {
-  it("Should be able to create a product", async () => {
+  it("Should be able to save a product in the database", async () => {
     //given
     const productRepositoryMock = new ProductRepositoryMock();
     let createProductUseCase = new CreateProductUseCase(productRepositoryMock);
