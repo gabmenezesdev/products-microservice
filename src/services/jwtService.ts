@@ -3,7 +3,7 @@ import HttpRequestError from "../exceptions";
 import { StatusCodes } from "http-status-codes";
 class JWTService {
   generateToken(
-    userData: { id: string; clinicId: string },
+    userData: { id: string; companyId: string },
     expireTime: string
   ): string {
     return jwt.sign(userData, process.env.JWT_SECRET_KEY, {

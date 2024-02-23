@@ -14,6 +14,8 @@ class DeleteProductController {
       const productRepository = new ProductRepository();
       const { productId } = req.params;
       const { companyId } = req.user;
+      console.log(productId, companyId);
+      console.log(req.user);
 
       await new DeleteProductUseCase(productRepository).execute(
         productId,
